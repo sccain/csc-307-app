@@ -1,5 +1,3 @@
-// src/Table.jsx
-// src/Table.jsx
 function TableHeader() {
 	return (
 	  <thead>
