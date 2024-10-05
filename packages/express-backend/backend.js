@@ -82,6 +82,17 @@ const addUser = (user) => {
     res.send();
   });
 
+const delUser = (user) => {
+	users["users_list"].pop(user);
+	return user;
+      };
+      
+	app.delete("/users", (req, res) => {
+	    const userToDel = req.body;
+	    delUser(userToDel);
+	    res.send();
+});
+
 app.listen(port, () => {
   console.log(
     `Example app listening at http://localhost:${port}`
