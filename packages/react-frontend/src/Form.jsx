@@ -4,23 +4,22 @@ import React, { useState } from "react";
 function Form(props) {
   const [person, setPerson] = useState({
     name: "",
-    job: ""
+    job: "",
+    id: ""
   });
 
   function handleChange(event) {
-	const { name, value } = event.target;
+	const { name, value, id } = event.target;
 	if (name === "job")
-	  setPerson({ name: person["name"], job: value });
-	else setPerson({ name: value, job: person["job"] });
+	  setPerson({ name: person["name"], job: value, id: id});
+	else setPerson({ name: value, job: person["job"], id: id});
       }
 	return (
 	<form>
-
 	  <label htmlFor="name">Name</label>
 	  <input
 	    type="text"
 	    name="name"
-	    id="name"
 	    value={person.name}
 	    onChange={handleChange}
 	  />
@@ -28,7 +27,6 @@ function Form(props) {
 	  <input
 	    type="text"
 	    name="job"
-	    id="job"
 	    value={person.job}
 	    onChange={handleChange}
 	  />
@@ -39,7 +37,7 @@ function Form(props) {
 
       function submitForm() {
 	props.handleSubmit(person);
-	setPerson({ name: "", job: "" });
+	setPerson({ name: "", job: "" , id: ""});
       }
 }
 

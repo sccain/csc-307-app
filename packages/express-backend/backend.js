@@ -61,8 +61,7 @@ const findUserByName = (name) => {
 
 const findUserById = (id) =>
     users["users_list"].find((user) => user["id"] === id);
-  
-    app.get("/users/:id", (req, res) => {
+app.get("/users/:id", (req, res) => {
         const id = req.params["id"]; //or req.params.id
         let result = findUserById(id);
         if (result === undefined) {
@@ -77,9 +76,9 @@ const addUser = (user) => {
     users["users_list"].push(user);
     return user;
   };
-  
-  app.post("/users", (req, res) => {
+app.post("/users", (req, res) => {
     const userToAdd = req.body;
+    userToAdd["id"] = idGen();
     addUser(userToAdd);
     res.send();
   });
@@ -87,13 +86,29 @@ const addUser = (user) => {
 const delUser = (user) => {
 	users["users_list"].pop(user);
 	return user;
-      };
-      
-	app.delete("/users", (req, res) => {
+      };      
+app.delete("/users", (req, res) => {
 	    const userToDel = req.body;
 	    delUser(userToDel);
 	    res.send();
 });
+
+const idGen = () => {
+    let letters = "";
+    var number;
+
+    do {
+        var lowercaseAsciiStart = 97;
+        var letterIndex = Math.floor(Math.random() * 26);
+        var letter = String.fromCharCode(lowercaseAsciiStart + letterIndex);
+        letters = letters.concat(letter)
+    } while (letters.length < 3)
+
+	do {
+  		number = Math.floor(Math.random() * 999);
+	} while (number < 100);
+	return letters.concat(number)
+}
 
 app.listen(port, () => {
   console.log(
