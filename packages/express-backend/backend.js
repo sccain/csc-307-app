@@ -80,7 +80,7 @@ app.post("/users", (req, res) => {
     const userToAdd = req.body;
     userToAdd["id"] = idGen();
     addUser(userToAdd);
-    res.status(200);
+    res.status(201).send(userToAdd);
   });
 
  const delUser = (user) => {

@@ -8,12 +8,26 @@ function MyApp() {
 	const [characters, setCharacters] = useState([]);
 
 	function removeOneCharacter(index) {
-		const updated = characters.filter((character, i) => {
-		  return i !== index;
+		const person = characters.filter((character, i) => {
+		  return i === index;
 		});
-		setCharacters(updated);
+		delUser(person)
+			.then(() => setCharacters([...characters]))
+			.catch((error) => {
+		  	console.log(error);
+		})
 	      }
 	    
+	function delUser(person) {
+		const promise = fetch("Http://localhost:8000/users", {
+			method: "DELETE",
+			headers: {
+			  "Content-Type": "application/json",
+			},
+			body: JSON.stringify(person),
+		      });
+	}
+
 	function fetchUsers() {
 		const promise = fetch("http://localhost:8000/users");
 		return promise;
@@ -46,6 +60,8 @@ function MyApp() {
 		    console.log(error);
 		  })
 	    }
+
+
 
 	return (
 		<div className="container">
