@@ -4,15 +4,14 @@ import React, { useState } from "react";
 function Form(props) {
   const [person, setPerson] = useState({
     name: "",
-    job: "",
-    id: ""
+    job: ""
   });
 
   function handleChange(event) {
-	const { name, value, id } = event.target;
+	const { name, value } = event.target;
 	if (name === "job")
-	  setPerson({ name: person["name"], job: value, id: id});
-	else setPerson({ name: value, job: person["job"], id: id});
+	  setPerson({ name: person["name"], job: value});
+	else setPerson({ name: value, job: person["job"]});
       }
 	return (
 	<form>
@@ -37,7 +36,7 @@ function Form(props) {
 
       function submitForm() {
 	props.handleSubmit(person);
-	setPerson({ name: "", job: "" , id: ""});
+	setPerson({ name: "", job: "" });
       }
 }
 
